@@ -1,0 +1,63 @@
+@import '../../styles/shared.scss';
+
+.chatroom-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 26px;
+  flex: 0 0 auto;
+}
+
+.chat-container {
+  overflow-y: auto;
+  flex: 1 0 200px;
+}
+
+.message {
+  padding: 0px;
+  margin: 5px 0px;
+
+  display: flex;
+  flex-direction: column;
+
+  .name {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    margin: 0px;
+    padding: 5px;
+  }
+
+  .chat-bubble {
+    border: 3px solid $backgroundColor-1;
+    padding: 10px;
+
+    .text {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .emoji {
+    }
+  }
+
+  &.left {
+    align-items: flex-end;
+
+    .name {
+      padding-right: 20px;
+    }
+
+    .chat-bubble {
+      border-radius: 20px 20px 0px 20px;
+    }
+  }
+
+  &.right {
+    align-items: flex-start;
+    .name {
+      padding-right: 20px;
+    }
+
+    .chat-bubble {
+      border-radius: 20px 20px 20px 0px;
+    }
+  }
+}
