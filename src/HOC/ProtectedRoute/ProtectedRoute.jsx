@@ -1,19 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Route, Redirect, useLocation } from 'react-router-dom';
-import { AuthContext } from '../Auth/Auth';
 
-const ProtectedRoute = ({ children, ...rest }) => {
-  const loggedIn = useContext(AuthContext);
+const ProtectedRoute = ({ isAuthenticated, isVerifying, ...rest }) => {
+  const location = useLocation();
+  // TODO, protected page renders 2 times , this causes an issue when redirecting and sending 
+  const prevPage = useRef(location.pathname);
 
-  const { pathname } = useLocation();
-
-  return loggedIn ? (
-    <Route {...rest}> {children} </Route>
+  return isVerifying ? (
+    <div />
+  ) : isAuthenticated ? (
+    <Route {...rest} />
   ) : (
     <Redirect
+      push
       to={{
+        state: { from: prevPage.current },
         pathname: '/login',
-        state: { from: pathname },
       }}
     />
   );

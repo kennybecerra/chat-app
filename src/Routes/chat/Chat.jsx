@@ -1,4 +1,5 @@
 import React from 'react';
+import Scroller from '../../HOC/Scroller/Scroller';
 // import { db } from '../../firebase/firebase.utils';
 import Layout from '../../HOC/Layout/Layout';
 import './Chat.scss';
@@ -53,24 +54,27 @@ const Chat = () => {
 
       <Layout.Content>
         <h2 className='chatroom-name'>Name of chat</h2>
-        <div className='chat-container'>
-          {fakeData.map((message) => {
-            return (
-              <div
-                className={`message ${
-                  message.name === 'kenny' ? 'left' : 'right'
-                }`}>
-                <h3 className='name'>{message.name}</h3>
-                <div className='chat-bubble'>
-                  <p className='text'>{message.text}</p>
-                  <div className='emoji'>
-                    <div className='emoji-options'></div>
+        <Scroller>
+          <div className='chat-container'>
+            {fakeData.map((message, index) => {
+              return (
+                <div
+                  key={index}
+                  className={`message ${
+                    message.name === 'kenny' ? 'left' : 'right'
+                  }`}>
+                  <h3 className='name'>{message.name}</h3>
+                  <div className='chat-bubble'>
+                    <p className='text'>{message.text}</p>
+                    <div className='emoji'>
+                      <div className='emoji-options'></div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </Scroller>
       </Layout.Content>
 
       <Layout.Footer>

@@ -10,7 +10,7 @@ $layoutColor2: rgba(58, 22, 76, 0.9);
   border-radius: 5px;
 
   box-shadow: 1px 5px 15px 5px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+  padding: 0rem;
 
   display: flex;
   flex-direction: column;
@@ -20,6 +20,7 @@ $layoutColor2: rgba(58, 22, 76, 0.9);
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
+    padding: 1rem 1rem 0rem 1rem;
 
     .navLink {
       text-decoration: none;
@@ -42,11 +43,13 @@ $layoutColor2: rgba(58, 22, 76, 0.9);
     flex: 1 0 70%;
     display: flex;
     flex-direction: column;
+    padding: 1rem 0rem 0rem 1rem;
   }
 
   .footer {
     flex: 0 0 auto;
     display: flex;
     flex-direction: row;
+    padding: 1rem 1rem 1rem 1rem;
   }
 }

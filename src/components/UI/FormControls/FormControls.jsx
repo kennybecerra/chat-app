@@ -29,7 +29,7 @@ const config = {
   ],
 };
 
-const Form = React.memo((props) => {
+const Form = (props) => {
   const { children, ...rest } = props;
   return (
     <form
@@ -40,9 +40,9 @@ const Form = React.memo((props) => {
       {children}
     </form>
   );
-});
+};
 
-const ButtonGroup = React.memo(({ children, className, ...rest }) => {
+const ButtonGroup = ({ children, className, ...rest }) => {
   return (
     <div
       {...rest}
@@ -54,27 +54,10 @@ const ButtonGroup = React.memo(({ children, className, ...rest }) => {
       {children}
     </div>
   );
-});
+};
 
 const Button = ({ children, disable, loading, onClick, ...rest }) => {
-  // const springStyles = useSpring({
-  //   from: {
-  //     stopColor1: config.color[0].disable.start,
-  //     stopColor2: config.color[0].disable.end,
-  //     deg: 0,
-  //   },
-  //   to: {
-  //     stopColor1: disable
-  //       ? config.color[0].disable.start
-  //       : config.color[0].enable.start,
-  //     stopColor2: disable
-  //       ? config.color[0].disable.end
-  //       : config.color[0].enable.end,
-  //     deg: 0,
-  //   },
-  // });
-
-  const [springStyles, set, stop] = useSpring(() => ({
+  const [springStyles, set] = useSpring(() => ({
     stopColor1: config.color[0].disable.start,
     stopColor2: config.color[0].disable.end,
     deg: 90,
@@ -152,8 +135,7 @@ const Button = ({ children, disable, loading, onClick, ...rest }) => {
     </div>
   );
 };
-
-const InputGroup = React.memo(({ children, className, ...rest }) => {
+const InputGroup = ({ children, className, ...rest }) => {
   return (
     <div
       {...rest}
@@ -163,7 +145,7 @@ const InputGroup = React.memo(({ children, className, ...rest }) => {
       {children}
     </div>
   );
-});
+};
 
 const Input = (props) => {
   //set props
@@ -171,10 +153,10 @@ const Input = (props) => {
 
   // Set unique names
   const crypto = window.crypto || window.msCrypto; // IE 11 compatibility
-  let array = new Uint16Array(3);
   const uniqueName = useMemo(() => {
+    let array = new Uint16Array(3);
     return crypto.getRandomValues(array).join('');
-  }, []);
+  }, [crypto]);
 
   // Set react-spring animation for on focus and verfied input
   const [springStyles, set] = useSpring(() => ({
@@ -224,4 +206,17 @@ const Input = (props) => {
   );
 };
 
-export { Button, ButtonGroup, Input, InputGroup, Form };
+// Memoizing for optimization
+const MemoizedForm = React.memo(Form);
+const MemoizedButtonGroup = React.memo(ButtonGroup);
+const MemoizedButton = React.memo(Button);
+const MemoizedInputGroup = React.memo(InputGroup);
+const MemoizedInput = React.memo(Input);
+
+export {
+  MemoizedForm as Form,
+  MemoizedButtonGroup as ButtonGroup,
+  MemoizedButton as Button,
+  MemoizedInput as Input,
+  MemoizedInputGroup as InputGroup,
+};
