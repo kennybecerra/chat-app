@@ -1,26 +1,63 @@
-import React from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
+import React, { useCallback } from 'react';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import Home from './Routes/Home/Home';
-import Chat from './Routes/chat/Chat';
+import Chat from './Routes/Chat/Chat';
 import Game from './Routes/Game';
 import Library from './Routes/Library';
 import Media from './Routes/Media';
-import Login from './Routes/login/Login';
+import Login from './Routes/Login/Login';
 import ProtectedRoute from './HOC/ProtectedRoute/ProtectedRoute';
 import { connect } from 'react-redux';
 import './App.scss';
-import { useTransition, animated } from 'react-spring';
+import { useTransition, animated, config } from 'react-spring';
 
 function App({ isAuthenticated, isVerifying }) {
   const location = useLocation();
+
+  // Route Transition Helper
+  const routeFadeDirection = useCallback((path) => {
+    let styleObj = {
+      opacity: 0,
+    };
+
+    switch (path) {
+      case '/chat':
+        styleObj.transform = `translate(100%, 0)`;
+        break;
+      case '/game':
+        styleObj.transform = `translate(0, -100%)`;
+        break;
+      case '/library':
+        styleObj.transform = `translate(0, 100%)`;
+        break;
+      case '/media':
+        styleObj.transform = `translate(-100%, 0)`;
+        break;
+      default:
+        styleObj.transform = `translate(0, 0)`;
+    }
+
+    return styleObj;
+  }, []);
+
   const transitions = useTransition(location, (location) => location.pathname, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
+    from: (location) => {
+      return routeFadeDirection(location.pathname);
+    },
+    enter: (location) => {
+      return {
+        opacity: 1,
+        transform: `translate(0%,0%)`,
+      };
+    },
+    leave: (location) => {
+      return routeFadeDirection(location.pathname);
+    },
+    config: config.slow,
   });
 
   return transitions.map(({ item, props, key }) => (
-    <animated.div key={key} style={props}>
+    <animated.div className='container' key={key} style={props}>
       <Switch location={item}>
         <ProtectedRoute
           exact
@@ -43,7 +80,6 @@ function App({ isAuthenticated, isVerifying }) {
           isVerifying={isVerifying}
           component={Game}
         />
-
         <ProtectedRoute
           exact
           path='/library'
@@ -51,7 +87,6 @@ function App({ isAuthenticated, isVerifying }) {
           isVerifying={isVerifying}
           component={Library}
         />
-
         <Route exact path='/login'>
           <Login />
         </Route>

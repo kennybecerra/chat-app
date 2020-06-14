@@ -1,24 +1,20 @@
-import React, { useEffect, useRef } from 'react';
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Route, useLocation, useHistory } from 'react-router-dom';
 
-const ProtectedRoute = ({ isAuthenticated, isVerifying, ...rest }) => {
+const ProtectedRoute = (props) => {
+  const { isAuthenticated, isVerifying, ...rest } = props;
   const location = useLocation();
-  // TODO, protected page renders 2 times , this causes an issue when redirecting and sending 
-  const prevPage = useRef(location.pathname);
+  const history = useHistory();
+  // TODO, protected page renders 2 times , this causes an issue when redirecting and sending
+  // const prevPage = useRef(location.pathname);
 
-  return isVerifying ? (
-    <div />
-  ) : isAuthenticated ? (
-    <Route {...rest} />
-  ) : (
-    <Redirect
-      push
-      to={{
-        state: { from: prevPage.current },
-        pathname: '/login',
-      }}
-    />
-  );
+  useEffect(() => {
+    if (!isVerifying && !isAuthenticated) {
+      history.push('/login', { from: location.pathname });
+    }
+  }, [history, isAuthenticated, isVerifying, location.pathname]);
+
+  return isVerifying ? <div /> : isAuthenticated ? <Route {...rest} /> : null;
 };
 
 export default ProtectedRoute;

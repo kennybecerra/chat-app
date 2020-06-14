@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './redux/configureStore';
 import * as serviceWorker from './serviceWorker';
+import 'overlayscrollbars/css/OverlayScrollbars.css';
 import './index.css';
 
 // const store = createStore(

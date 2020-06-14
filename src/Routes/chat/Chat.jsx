@@ -1,7 +1,9 @@
-import React from 'react';
-import Scroller from '../../HOC/Scroller/Scroller';
+import React, { useState } from 'react';
 // import { db } from '../../firebase/firebase.utils';
 import Layout from '../../HOC/Layout/Layout';
+import OverlayScrollbars from 'overlayscrollbars';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { MD5 } from '../../utility/utility';
 import './Chat.scss';
 
 const Chat = () => {
@@ -48,14 +50,30 @@ const Chat = () => {
     },
   ];
 
+  const [textInput, setTextInput] = useState('');
+
+  const handleTextInput = (e) => {
+    setTextInput(e.currentTarget.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted something');
+  };
+
   return (
     <Layout>
       <Layout.Nav />
 
       <Layout.Content>
         <h2 className='chatroom-name'>Name of chat</h2>
-        <Scroller>
-          <div className='chat-container'>
+        <div className='chat-container os-host-flexbox'>
+          <OverlayScrollbarsComponent
+            style={{ width: '100%' }}
+            options={{
+              scrollbars: { autoHide: 'scroll' },
+              sizeAutoCapable: true,
+            }}>
             {fakeData.map((message, index) => {
               return (
                 <div
@@ -73,14 +91,29 @@ const Chat = () => {
                 </div>
               );
             })}
-          </div>
-        </Scroller>
+          </OverlayScrollbarsComponent>
+        </div>
       </Layout.Content>
 
       <Layout.Footer>
-        <form className='chat-input-container'>
-          <input type='text' name='' id='' />
-          <button className='submit'>send</button>
+        <form className='chat-input-container' onSubmit={handleSubmit}>
+          <img
+            className='profile-image'
+            src={`https://www.gravatar.com/avatar/${MD5(
+              'Kb10j.kb@gmail.com'
+            )}?d=wavatar`}
+            alt='Profile'
+          />
+          <input
+            className='text-input'
+            type=''
+            name='textInput'
+            id='textInput'
+            placeholder='Place message here'
+            value={textInput}
+            onChange={handleTextInput}
+          />
+          <button className='submit-button'>send</button>
         </form>
       </Layout.Footer>
     </Layout>
