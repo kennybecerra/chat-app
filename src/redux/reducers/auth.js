@@ -8,6 +8,7 @@ import {
   VERIFY_REQUEST,
   VERIFY_SUCCESS_UPDATE,
   VERIFY_SUCCESS_NO_UPDATE,
+  UPDATE_USER_DETAILS,
 } from '../actions/';
 
 const initialState = {
@@ -21,6 +22,7 @@ const initialState = {
   errroCode: null,
   errorMessage: null,
   user: {},
+  userInfo: {},
 };
 
 export default (state = initialState, action) => {
@@ -91,6 +93,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isVerifying: false,
+      };
+    case UPDATE_USER_DETAILS:
+      return {
+        ...state,
+        userInfo: { ...action.payload.userInfo },
       };
     default:
       return state;

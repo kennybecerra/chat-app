@@ -4,6 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from './redux/configureStore';
+import {mobileDeviceCompatibility} from "./utility/compatibility"
 import * as serviceWorker from './serviceWorker';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 import './index.css';
@@ -31,6 +32,8 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+mobileDeviceCompatibility();
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

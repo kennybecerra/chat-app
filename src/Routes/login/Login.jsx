@@ -40,19 +40,6 @@ const reducer = (state, action) => {
       newState.password.value = action.value;
       newState.password.ready = action.ready;
       break;
-    case 'error':
-      newState.errorMessage = action.message;
-      newState.errorCode = action.code;
-      newState.loading = false;
-      break;
-    case 'start-signIn':
-      newState.loading = true;
-      newState.errorMessage = null;
-      newState.errorCode = null;
-      break;
-    case 'end-signIn':
-      newState.loading = false;
-      break;
     default:
       console.log('Error occured, unknown action type in Login reducer');
       throw new Error('unknown action type in Login reducer');
@@ -104,18 +91,22 @@ const Login = (props) => {
   });
 
   // fading animation for error messages
-  const transitions = useTransition(props.state.errorMessage, (item) => item, {
-    from: {
-      opacity: 0,
-      color: 'white',
-      transform: 'translate(0px,200px)',
-    },
-    enter: { opacity: 1, color: 'red', transform: 'translate(0px,0px)' },
-    leave: {
-      opacity: 0,
-      transform: 'translate(200px,0px)',
-    },
-  });
+  const transitions = useTransition(
+    props.state.auth.errorMessage,
+    (item) => item,
+    {
+      from: {
+        opacity: 0,
+        color: 'white',
+        transform: 'translate(0px,200px)',
+      },
+      enter: { opacity: 1, color: 'red', transform: 'translate(0px,0px)' },
+      leave: {
+        opacity: 0,
+        transform: 'translate(200px,0px)',
+      },
+    }
+  );
 
   // Helpers
   const validateEmail = (email) => {
@@ -149,15 +140,11 @@ const Login = (props) => {
     props
       .loginUser(type, loginState.email.value, loginState.password.value)
       .then(() => {
-        console.log('successfully signined in , this then function ran');
-        console.log('current History');
-        console.log(history);
         const prevPage = history.location.state && history.location.state.from;
-        console.log('this is prevPage');
-        console.log(prevPage);
         if (prevPage) {
-          console.log(`${prevPage} was pushed to history`);
           history.push(prevPage);
+        } else {
+          history.push('/home');
         }
       });
   };
@@ -220,14 +207,6 @@ const Login = (props) => {
               Submit
             </Button>
             <Button onClick={handleSignOut}>Sign out</Button>
-            <Button
-              onClick={() => {
-                props.loading
-                  ? dispatch({ type: 'end-signIn' })
-                  : dispatch({ type: 'start-signIn' });
-              }}>
-              Loading
-            </Button>
           </ButtonGroup>
           <div className='error-container'>
             {transitions.map(

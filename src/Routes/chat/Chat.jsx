@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-// import { db } from '../../firebase/firebase.utils';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../HOC/Layout/Layout';
 import OverlayScrollbars from 'overlayscrollbars';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import { MD5 } from '../../utility/utility';
+import { auth, fireStore } from '../../firebase/firebase.utils';
+import { connect } from 'react-redux';
 import './Chat.scss';
 
-const Chat = () => {
+const Chat = (props) => {
   const fakeData = [
     {
       name: 'kenny',
@@ -58,15 +59,19 @@ const Chat = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitted something');
+    console.log(auth.currentUser);
   };
 
   return (
     <Layout>
-      <Layout.Nav />
+      {/* <Layout.Nav />
 
       <Layout.Content>
         <h2 className='chatroom-name'>Name of chat</h2>
+
+        search
+
+
         <div className='chat-container os-host-flexbox'>
           <OverlayScrollbarsComponent
             style={{ width: '100%' }}
@@ -115,9 +120,19 @@ const Chat = () => {
           />
           <button className='submit-button'>send</button>
         </form>
-      </Layout.Footer>
+      </Layout.Footer> */}
     </Layout>
   );
 };
 
-export default Chat;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Chat);

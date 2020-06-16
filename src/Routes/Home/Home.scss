@@ -1,0 +1,103 @@
+@import '../../styles/shared.scss';
+
+.menu {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: space-evenly;
+  align-items: center;
+  overflow-y: auto;
+  z-index: 0;
+  position: relative;
+
+  @include ResponsiveMobileFirst(tab) {
+    padding: 50px;
+  }
+
+  .blob {
+    height: 86vw;
+    width: 86vw;
+    position: absolute;
+    left: -10%;
+    top: -10%;
+    will-change: transform;
+    border-radius: 25%;
+    background: lightcoral;
+    background-image: linear-gradient(
+      45deg,
+      rgba(250, 199, 228, 0.3),
+      rgba(245, 146, 202, 0.9)
+    );
+    box-shadow: 10px 10px 25px 1px rgba(0, 0, 0, 0.75);
+    opacity: 0.6;
+    transform: rotate(40deg);
+    transform-origin: center center;
+    // filter: url('#goo');
+    z-index: 0;
+
+    @include ResponsiveMobileFirst(tab) {
+      max-width: 500px;
+      max-height: 500px;
+    }
+  }
+
+  .menuHeader {
+    flex: 0 0 86%;
+    z-index: 1;
+
+    @include ResponsiveMobileFirst(tab) {
+      flex: 0 0 100%;
+    }
+  }
+
+  .menuItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0px;
+    position: relative;
+    border-radius: 25px;
+
+    height: 40vw;
+    width: 40vw;
+    background-color: rgba(72, 64, 108, 0.7);
+    box-shadow: 1px 5px 15px 5px rgba(0, 0, 0, 0.1);
+
+    z-index: 0;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+
+    @include ResponsiveMobileFirst(tab) {
+      max-width: 200px;
+      max-height: 200px;
+      margin: 0px 20px;
+    }
+
+    .menuIcon {
+      height: 60%;
+      width: 60%;
+      fill: white;
+    }
+
+    .menuText {
+      color: white;
+    }
+
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   height: 100%;
+    //   width: 100%;
+    //   // background-color: rgba(72, 64, 108, 0.9);
+    //   background-color: rgba(255, 255, 255, 0.1);
+    //   filter: blur(20px);
+    // }
+  }
+}
