@@ -15,12 +15,12 @@ function App({ isAuthenticated, isVerifying }) {
   const location = useLocation();
 
   // Route Transition Helper
-  const routeFadeDirection = useCallback((path) => {
+  const routeFadeDirection = useCallback((currentLocation) => {
     let styleObj = {
       opacity: 0,
     };
 
-    switch (path) {
+    switch (currentLocation.pathname) {
       case '/chat':
         styleObj.transform = `translate(100%, 0)`;
         break;
@@ -41,17 +41,17 @@ function App({ isAuthenticated, isVerifying }) {
   }, []);
 
   const transitions = useTransition(location, (location) => location.pathname, {
-    from: (location) => {
-      return routeFadeDirection(location.pathname);
+    from: (currentLocation) => {
+      return routeFadeDirection(currentLocation);
     },
-    enter: (location) => {
+    enter: (currentLocation) => {
       return {
         opacity: 1,
         transform: `translate(0%,0%)`,
       };
     },
-    leave: (location) => {
-      return routeFadeDirection(location.pathname);
+    leave: (currentLocation) => {
+      return routeFadeDirection(currentLocation.pathname);
     },
     config: config.slow,
   });
@@ -67,7 +67,6 @@ function App({ isAuthenticated, isVerifying }) {
           component={Media}
         />
         <ProtectedRoute
-          exact
           path='/chat'
           isAuthenticated={isAuthenticated}
           isVerifying={isVerifying}

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Route, useLocation, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 
 const ProtectedRoute = (props) => {
   const { isAuthenticated, isVerifying, ...rest } = props;

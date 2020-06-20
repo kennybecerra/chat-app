@@ -1,4 +1,4 @@
-import { debounce } from './utility';
+// import { debounce } from './utility';
 
 export const load = () => {
   window.addEventListener('load', function () {
@@ -6,32 +6,32 @@ export const load = () => {
   });
 };
 
-const toggleFullScreen = () => {
-  var doc = window.document;
-  var docEl = doc.documentElement;
+// const toggleFullScreen = () => {
+//   var doc = window.document;
+//   var docEl = doc.documentElement;
 
-  var requestFullScreen =
-    docEl.requestFullscreen ||
-    docEl.mozRequestFullScreen ||
-    docEl.webkitRequestFullScreen ||
-    docEl.msRequestFullscreen;
-  var cancelFullScreen =
-    doc.exitFullscreen ||
-    doc.mozCancelFullScreen ||
-    doc.webkitExitFullscreen ||
-    doc.msExitFullscreen;
+//   var requestFullScreen =
+//     docEl.requestFullscreen ||
+//     docEl.mozRequestFullScreen ||
+//     docEl.webkitRequestFullScreen ||
+//     docEl.msRequestFullscreen;
+//   var cancelFullScreen =
+//     doc.exitFullscreen ||
+//     doc.mozCancelFullScreen ||
+//     doc.webkitExitFullscreen ||
+//     doc.msExitFullscreen;
 
-  if (
-    !doc.fullscreenElement &&
-    !doc.mozFullScreenElement &&
-    !doc.webkitFullscreenElement &&
-    !doc.msFullscreenElement
-  ) {
-    return requestFullScreen.call(docEl);
-  } else {
-    return cancelFullScreen.call(doc);
-  }
-};
+//   if (
+//     !doc.fullscreenElement &&
+//     !doc.mozFullScreenElement &&
+//     !doc.webkitFullscreenElement &&
+//     !doc.msFullscreenElement
+//   ) {
+//     return requestFullScreen.call(docEl);
+//   } else {
+//     return cancelFullScreen.call(doc);
+//   }
+// };
 
 // Very crude detection for mobile device, using a mix of user agent sniffing and feature detection
 export const isMobile = () => {
@@ -72,7 +72,7 @@ export const isMobile = () => {
 
 export const mobileDeviceCompatibility = () => {
   if (isMobile()) {
-    let maxVh = window.innerHeight * 0.01;
+    // let maxVh = window.innerHeight * 0.01;
 
     window.addEventListener('load', function () {
       document.documentElement.style.setProperty(

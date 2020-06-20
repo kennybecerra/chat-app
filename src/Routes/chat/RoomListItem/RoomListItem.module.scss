@@ -1,0 +1,99 @@
+$circleDiameter: 60px;
+
+.chatContainer {
+  flex: 0 0 20%;
+  // border: 2px solid red;
+  padding: 10px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgba(37, 44, 74, 0.7);
+
+  .imgContainer {
+    height: $circleDiameter;
+    width: $circleDiameter;
+    border-radius: 50%;
+    margin: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+    background-image: radial-gradient(
+      ellipse at ($circleDiameter / 4) ($circleDiameter / 10),
+      #ffffff 0%,
+      hsl(128, 100%, 93%) 5%,
+      hsl(171, 66%, 49%) 100%
+    );
+    border-radius: 50%;
+    position: relative;
+
+    .imgText {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-size: 20px;
+      text-align: center;
+      color: white;
+      margin: 10px;
+    }
+  }
+
+  .chatText {
+    color: white;
+    font-size: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    margin: 0px;
+    text-align: center;
+  }
+
+  &:nth-child(2n) {
+    .imgContainer {
+      background-image: radial-gradient(
+        ellipse at ($circleDiameter / 4) ($circleDiameter / 10),
+        #ffffff 0%,
+        hsl(347, 90%, 98%) 5%,
+        hsl(347, 90%, 76%) 100%
+      );
+    }
+  }
+
+  &:nth-child(3n) {
+    .imgContainer {
+      background-image: radial-gradient(
+        ellipse at ($circleDiameter / 4) ($circleDiameter / 10),
+        #ffffff 0%,
+        hsl(225, 94%, 99%) 5%,
+        hsl(225, 94%, 69%) 100%
+      );
+    }
+  }
+
+  &:nth-child(4n) {
+    .imgContainer {
+      background-image: radial-gradient(
+        ellipse at ($circleDiameter / 4) ($circleDiameter / 10),
+        #ffffff 0%,
+        hsl(312, 84%, 98%) 5%,
+        hsl(312, 84%, 60%) 100%
+      );
+    }
+  }
+
+  &:nth-child(5n) {
+    .imgContainer {
+      background-image: radial-gradient(
+        ellipse at ($circleDiameter / 4) ($circleDiameter / 10),
+        #ffffff 0%,
+        hsl(254, 100%, 98%) 5%,
+        hsl(254, 100%, 58%) 100%
+      );
+    }
+  }
+}

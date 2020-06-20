@@ -1,0 +1,141 @@
+@import '../../styles/shared.scss';
+
+.nav {
+  flex: 0 0 10%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .navHeader {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+}
+
+.search {
+  flex: 0 0 10%;
+
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  align-items: center;
+
+  .inputContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #2d365e;
+    padding: 10px 20px;
+    border-radius: 25px;
+    width: 85%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    border: 1px solid transparent;
+    transition: border 0.3s ease-in-out;
+
+    &:focus-within {
+      border: 0.5px solid #a0a7be;
+    }
+
+    .input {
+      flex: 1 0 80%;
+      background-color: transparent;
+      border: 0px solid transparent;
+      color: #a0a7be;
+
+      font-family: 'Roboto', Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 500;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .icon {
+      flex: 0 0 20px;
+      height: 20px;
+      width: 20px;
+      padding: 5px;
+      fill: #a0a7be;
+    }
+  }
+}
+
+.myChats {
+  flex: 1 0 70%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+
+  width: 100%;
+}
+
+.menu {
+  flex: 0 0 8%;
+  box-shadow: 0 -5px 20px 1px rgba(0, 0, 0, 0.2);
+  max-height: 100px;
+  background-color: #1d2545;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+
+  .iconContainer {
+    flex: 0 0 25%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    cursor: pointer;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 60%;
+      right: 0px;
+      background-color: #556081;
+    }
+
+    .menuIcon {
+      height: 20px;
+      width: 20px;
+      fill: #556081;
+    }
+  }
+}
+
+.blob {
+  height: 100vw;
+  width: 100vw;
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  will-change: transform;
+  border-radius: 5%;
+  background: lightcoral;
+  background-image: linear-gradient(90deg, #ff52c5, #5b29ff);
+  box-shadow: 10px 10px 25px 1px rgba(0, 0, 0, 0.75);
+  opacity: 0.6;
+  transform: translate(6%, -62%) rotate(18deg);
+  // transform: translate(0%, 0%) rotate(0deg);
+  transform-origin: center center;
+  z-index: -1;
+
+  @include ResponsiveMobileFirst(tab) {
+    max-width: 500px;
+    max-height: 500px;
+  }
+}

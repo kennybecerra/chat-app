@@ -48,60 +48,13 @@ const receiveUserDetails = (user) => {
     },
   };
 };
+
 // Async
-
-// const updateUserDetails = (user) => {
-//   return (dispatch) => {
-//     return new Promise((resolve, reject) => {
-//       // initialize userDetails
-//       fireStore
-//         .collection('users')
-//         .doc(user.uid)
-//         .get()
-//         .then((doc) => {
-//           if (doc.exists) {
-//             console.log('This user has a user details file');
-//             dispatch(receiveUserDetails(doc.data()));
-//             resolve();
-//           } else {
-//             console.log('this user does not have a user details file');
-//             let data = {
-//               rooms: [],
-//             };
-
-//             fireStore
-//               .collection('users')
-//               .doc(user.uid)
-//               .set(data)
-//               .then(function (doc) {
-//                 console.log('Document successfully written!');
-//                 console.log('This is the doc return ');
-//                 console.log(doc);
-//                 dispatch(receiveUserDetails(data));
-//                 resolve();
-//               })
-//               .catch(function (error) {
-//                 console.error('Error writing document: ', error);
-//                 reject(error);
-//               });
-//           }
-//         })
-//         .catch((err) => {
-//           console.log('There was an error trying to read user details');
-//           console.log(err);
-//           reject(err);
-//         });
-//     });
-//   };
-// };
-
 const updateUserDetails = (user) => {
   return async (dispatch) => {
     // initialize userDetails
     try {
       let doc = await fireStore.collection('users').doc(user.uid).get();
-      console.log(doc);
-      console.log(doc.data());
       if (doc.exists) {
         console.log('This user has a user details file');
         dispatch(receiveUserDetails(doc.data()));
@@ -120,62 +73,6 @@ const updateUserDetails = (user) => {
     return;
   };
 };
-
-// export const loginUser = (type, username, pass) => {
-//   return (dispatch) => {
-//     return new Promise((resolve, reject) => {
-//       switch (type) {
-//         case 'new':
-//           dispatch(requestLogin());
-//           auth
-//             .createUserWithEmailAndPassword(username, pass)
-//             .then((user) => {
-//               console.log('successfully made a new user, via login component');
-//               console.log(user);
-
-//               dispatch(receiveLogin(user));
-//               // initialize userDetails
-//               dispatch(updateUserDetails(user)).then(() => {
-//                 resolve();
-//               });
-//             })
-//             .catch(function (error) {
-//               console.log('issue logging in as a new user via login component');
-//               const { message, code } = error;
-//               dispatch(loginError(code, message));
-//               reject();
-//             });
-
-//           break;
-//         case 'signIn':
-//           dispatch(requestLogin());
-//           auth
-//             .signInWithEmailAndPassword(username, pass)
-//             .then(({ user }) => {
-//               console.log('Successgully Signed in, via login button function');
-//               console.log(user);
-
-//               dispatch(receiveLogin(user));
-//               // initialize userDetails
-//               dispatch(updateUserDetails(user)).then(() => {
-//                 resolve();
-//               });
-//             })
-//             .catch(function (error) {
-//               console.log('error occured when logging in atttempt ');
-//               // Handle Errors here.
-//               const { message, code } = error;
-//               dispatch(loginError(code, message));
-//               reject();
-//             });
-//           break;
-//         default:
-//           reject(new Error('Sign in type was not provided correctly'));
-//           break;
-//       }
-//     });
-//   };
-// };
 
 export const loginUser = (type, username, pass) => {
   return async (dispatch) => {
