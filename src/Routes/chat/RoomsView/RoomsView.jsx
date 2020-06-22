@@ -2,23 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import RoomListItem from '../RoomListItem/RoomListItem';
 import Icon from '../../../components/UI/Icon/Icon';
-import { fireStore } from '../../../firebase/firebase.utils';
+import * as actionCreators from '../../../redux/actions';
+import { connect } from 'react-redux';
 import styles from './RoomsView.module.scss';
 
 const RoomsView = (props) => {
-  const [rooms, updateRoom] = useState([]);
   const [textInput, setTextInput] = useState('');
 
   useEffect(() => {
-    fireStore
-      .collection('Rooms')
-      .get()
-      .then((querySnapshot) => {
-        let roomsTemp = querySnapshot.docs.map((room) => {
-          return { id: room.id, ...room.data() };
-        });
-        updateRoom(roomsTemp);
-      });
+    props.retrieveAllRooms();
   }, []);
 
   const handleChange = (e) => {
@@ -63,7 +55,7 @@ const RoomsView = (props) => {
             scrollbars: { autoHide: 'scroll' },
             sizeAutoCapable: true,
           }}>
-          {rooms.filter(roomsFilter).map((room) => {
+          {props.allRooms.filter(roomsFilter).map((room) => {
             return <RoomListItem key={room.id} room={room} />;
           })}
         </OverlayScrollbarsComponent>
@@ -72,4 +64,16 @@ const RoomsView = (props) => {
   );
 };
 
-export default RoomsView;
+const mapStateToProps = (state) => {
+  return {
+    allRooms: state.rooms.allRooms,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    retrieveAllRooms: () => dispatch(actionCreators.retrieveAllRooms()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomsView);

@@ -1,12 +1,11 @@
 import React, { useReducer } from 'react';
 import Icon from '../../../components/UI/Icon/Icon';
-import { fireStore } from '../../../firebase/firebase.utils';
 import { connect } from 'react-redux';
 import * as actionCreators from '../../../redux/actions';
 import styles from './RoomCreateView.module.scss';
 
 const initialState = {
-  private: true,
+  private: false,
   name: '',
   description: '',
   color: '#000000',
@@ -62,6 +61,8 @@ const RoomCreateView = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Submit ran');
+    props.createNewRoom(chatDetails);
   };
 
   return (
@@ -147,6 +148,7 @@ const RoomCreateView = (props) => {
           </div>
           <div className={styles.buttonContainer}>
             <button
+              disabled={!chatDetails.ready}
               className={`${styles.button} ${
                 !chatDetails.ready && styles.buttonDisable
               }`}>

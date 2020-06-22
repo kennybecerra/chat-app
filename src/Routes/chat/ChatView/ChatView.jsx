@@ -31,7 +31,7 @@ const ChatView = (props) => {
             sizeAutoCapable: true,
           }}>
           {props.userInfo.rooms.map((room) => {
-            return <RoomListItem key={room} room={room} />;
+            return <RoomListItem key={room.uid} room={room} />;
           })}
         </OverlayScrollbarsComponent>
       </div>

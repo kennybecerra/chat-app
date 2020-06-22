@@ -13,7 +13,20 @@ const config = {
   measurementId: process.env.REACT_APP_measurementId,
 };
 
+// settings
 firebase.initializeApp(config);
+
+// enabled persistance
+firebase
+  .firestore()
+  .enablePersistence()
+  .then((success) => {
+    console.log('Successfully added persistance');
+  })
+  .catch((err) => {
+    console.log('Failed to enable Persistance');
+  });
 
 export const fireStore = firebase.firestore();
 export const auth = firebase.auth();
+export { firebase };
