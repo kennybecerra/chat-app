@@ -1,0 +1,189 @@
+@import '../../../styles/shared.scss';
+
+$border-radius: 25px;
+$border-width: 2px;
+$border-color: hsl(223, 11%, 33%);
+
+.nav {
+  flex: 0 0 10%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .navHeader {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+}
+
+.formContainer {
+  flex: 1 0 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .privacy {
+    display: flex;
+    flex-direction: row;
+    height: 100px;
+    width: 85%;
+    margin: 10px 0px;
+
+    .public,
+    .private {
+      flex: 0 0 50%;
+      border: $border-width solid $border-color;
+      border-left: ($border-width/2) solid $border-color;
+      border-right: ($border-width/2) solid $border-color;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      background-image: linear-gradient(
+        45deg,
+        hsla(231, 23%, 12%, 0.8),
+        hsla(228, 7%, 27%, 0.8)
+      );
+      overflow: hidden;
+
+      .icon {
+        width: auto;
+        height: 40%;
+        fill: white;
+      }
+      .text {
+        margin: 10px 0px 0px 0px;
+        text-transform: capitalize;
+      }
+
+      &.active {
+        background-image: linear-gradient(
+          45deg,
+          rgba(106, 94, 141, 0.8),
+          rgba(231, 81, 234, 0.8)
+        );
+      }
+    }
+
+    & > div:first-child {
+      border-radius: $border-radius 0px 0px $border-radius;
+      border-left: $border-width solid $border-color;
+    }
+
+    & > div:last-child {
+      border-radius: 0px $border-radius $border-radius 0px;
+      border-right: $border-width solid $border-color;
+    }
+  }
+
+  .settings {
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    margin: 10px 0px 0px 0px;
+
+    .inputContainer {
+      border: 2px solid $border-color;
+      border-top: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+      width: 100%;
+      padding: 12px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      background-image: linear-gradient(
+        45deg,
+        hsla(231, 23%, 12%, 0.7),
+        hsla(228, 7%, 27%, 0.7)
+      );
+      overflow: hidden;
+
+      .label {
+        color: hsl(223, 11%, 53%);
+        margin-bottom: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      &:first-child {
+        border-radius: 25px 25px 0px 0px;
+        border-top: 2px solid $border-color;
+      }
+
+      &:nth-last-child(2) {
+        border-bottom: 2px solid $border-color;
+        border-radius: 0px 0px 25px 25px;
+      }
+
+      .input {
+        border: none;
+        border-bottom: 1px solid $border-color;
+        background-color: transparent;
+        color: hsl(223, 21%, 83%);
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 26px;
+        outline: none;
+
+        text-align: center;
+
+        &:focus {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: hsl(223, 21%, 83%);
+        }
+      }
+    }
+
+    .buttonContainer {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+
+      .button {
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        background-image: linear-gradient(
+          135deg,
+          hsl(299, 54%, 34%),
+          hsla(341, 78%, 56%, 1)
+        );
+        color: white;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        transition: outline 1s ease-in-out;
+
+        :focus {
+          outline: none;
+        }
+
+        &.buttonDisable {
+          filter: grayscale(0.6);
+        }
+      }
+    }
+  }
+}

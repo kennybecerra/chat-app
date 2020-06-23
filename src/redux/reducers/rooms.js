@@ -6,6 +6,12 @@ import {
   ALL_ROOMS_RETRIEVE_SUCCESS_CACHE,
   ALL_ROOMS_RETRIEVE_SUCCESS_SERVER,
   ALL_ROOMS_RETRIEVE_FAILURE,
+  ROOM_RETRIEVE_REQUEST,
+  ROOM_RETRIEVE_SUCCESS,
+  ROOM_RETRIEVE_FAILURE,
+  ROOM_UPDATE_REQUEST,
+  ROOM_UPDATE_SUCCESS,
+  ROOM_UPDATE_FAILURE,
 } from '../actions';
 
 const initialState = {
@@ -17,6 +23,14 @@ const initialState = {
   retrievingAllRoomsFailure: false,
   lastRetrieval: null,
   allRooms: [],
+  isRetrievingRoom: false,
+  retrievingRoomSuccess: false,
+  retrievingRoomFailure: false,
+  room: null,
+  isUpdatingRoom: false,
+  UpdatingRoomSuccess: false,
+  UpdatingRoomFailure: false,
+  error: null,
 };
 
 export default (state = initialState, action) => {
@@ -68,6 +82,48 @@ export default (state = initialState, action) => {
         isRetrievingAllRooms: false,
         retrievingAllRoomsSuccess: false,
         retrievingAllRoomsFailure: true,
+      };
+    case ROOM_RETRIEVE_REQUEST:
+      return {
+        ...state,
+        isRetrievingRoom: true,
+      };
+    case ROOM_RETRIEVE_SUCCESS:
+      return {
+        ...state,
+        isRetrievingRoom: false,
+        retrievingRoomSuccess: true,
+        retrievingRoomFailure: false,
+        room: action.payload,
+      };
+    case ROOM_RETRIEVE_FAILURE:
+      return {
+        ...state,
+        isRetrievingRoom: false,
+        retrievingRoomSuccess: false,
+        retrievingRoomFailure: true,
+        error: action.payload,
+      };
+    case ROOM_UPDATE_REQUEST:
+      return {
+        ...state,
+        isUpdatingRoom: true,
+      };
+    case ROOM_UPDATE_SUCCESS:
+      return {
+        ...state,
+        isUpdatingRoom: false,
+        UpdatingRoomSuccess: true,
+        UpdatingRoomFailure: false,
+        room: action.payload,
+      };
+    case ROOM_UPDATE_FAILURE:
+      return {
+        ...state,
+        isUpdatingRoom: false,
+        UpdatingRoomSuccess: false,
+        UpdatingRoomFailure: true,
+        error: action.payload,
       };
     default:
       return state;

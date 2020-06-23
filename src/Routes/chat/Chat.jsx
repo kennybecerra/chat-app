@@ -4,6 +4,7 @@ import ChatView from './ChatView/ChatView';
 import RoomCreateView from './RoomCreateView/RoomCreateView';
 import RoomsView from './RoomsView/RoomsView';
 import RoomView from './RoomView/RoomView';
+import RoomUpdateView from './RoomUpdateView/RoomUpdateView';
 import { Switch, Route } from 'react-router-dom';
 import styles from './Chat.module.scss';
 import Icon from '../../components/UI/Icon/Icon';
@@ -16,13 +17,16 @@ const Chat = (props) => {
     <Layout>
       <div className={styles.blob}></div>
       <Switch>
-        <Route path={`${path}/rooms`}>
+        <Route exact path={`${path}/rooms`}>
           <RoomsView />
         </Route>
-        <Route path={`${path}/room/:roomID`}>
+        <Route exact path={`${path}/room/:roomID`}>
           <RoomView />
         </Route>
-        <Route path={`${path}/roomCreate`}>
+        <Route exact path={`${path}/roomUpdate/:roomID`}>
+          <RoomUpdateView />
+        </Route>
+        <Route exact path={`${path}/roomCreate`}>
           <RoomCreateView />
         </Route>
         <Route exact path={path}>
