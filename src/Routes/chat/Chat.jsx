@@ -5,6 +5,7 @@ import RoomCreateView from './RoomCreateView/RoomCreateView';
 import RoomsView from './RoomsView/RoomsView';
 import RoomView from './RoomView/RoomView';
 import RoomUpdateView from './RoomUpdateView/RoomUpdateView';
+import ChatMenu from './ChatMenu/ChatMenu';
 import { Switch, Route } from 'react-router-dom';
 import styles from './Chat.module.scss';
 import Icon from '../../components/UI/Icon/Icon';
@@ -33,32 +34,7 @@ const Chat = (props) => {
           <ChatView />
         </Route>
       </Switch>
-      <div className={styles.menu}>
-        <div className={styles.iconContainer}>
-          <Icon name='search' className={styles.menuIcon} />
-        </div>
-        <div
-          className={styles.iconContainer}
-          onClick={() => {
-            history.push(`${path}/roomCreate`);
-          }}>
-          <Icon name='add-solid' className={styles.menuIcon} />
-        </div>
-        <div
-          className={styles.iconContainer}
-          onClick={() => {
-            history.push(`${path}`);
-          }}>
-          <Icon name='heart-solid' className={styles.menuIcon} />
-        </div>
-        <div
-          className={styles.iconContainer}
-          onClick={() => {
-            history.push(`${path}/rooms`);
-          }}>
-          <Icon name='list2' className={styles.menuIcon} />
-        </div>
-      </div>
+      <ChatMenu />
     </Layout>
   );
 };

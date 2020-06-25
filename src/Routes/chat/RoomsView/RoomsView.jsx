@@ -56,7 +56,7 @@ const RoomsView = (props) => {
             sizeAutoCapable: true,
           }}>
           {props.allRooms.filter(roomsFilter).map((room) => {
-            return <RoomListItem key={room.id} room={room} />;
+            return <RoomListItem key={room.uid} room={room} />;
           })}
         </OverlayScrollbarsComponent>
       </div>

@@ -1,0 +1,146 @@
+@import '../../../../styles/shared.scss';
+
+// $circleDiameter: 50px;
+// $circleMargin: $circleDiameter / 6;
+// $textBoxTranslationUp: $circleDiameter / 2;
+
+$nameBGColor: hsl(235, 53%, 40%);
+
+.messageLeft,
+.messageRight {
+  --circleDiameter: 25px;
+  --circleMargin: calc(var(--circleDiameter) / 3);
+
+  @include ResponsiveMobileFirst(tab) {
+    --circleDiameter: 45px;
+    --circleMargin: calc(var(--circleDiameter) / 6);
+  }
+
+  --textBoxTranslationUp: calc(var(--circleDiameter) / 2);
+  --nameBGColor: hsl(235, 53%, 40%);
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 0;
+  margin: 0px 20px;
+
+  .inner {
+    background-color: var(--nameBGColor);
+    color: white;
+
+    display: flex;
+    flex-direction: row;
+    border-radius: 40px;
+    // padding-right: 15px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+
+    .imgContainer {
+      padding: var(--circleMargin);
+      z-index: 2;
+      background-color: var(--nameBGColor);
+      border-radius: 50%;
+      position: relative;
+      .img {
+        // margin: $circleMargin;
+        height: var(--circleDiameter);
+        width: var(--circleDiameter);
+        border-radius: 50%;
+        z-index: 2;
+
+        background-image: radial-gradient(
+          ellipse at calc(var(--circleDiameter) / 4)
+            calc(var(--circleDiameter) / 10),
+          #ffffff 0%,
+          hsl(312, 84%, 98%) 5%,
+          hsl(312, 84%, 60%) 100%
+        );
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        height: 15%;
+        width: 15%;
+        background-color: transparent;
+        z-index: 1;
+
+        border-radius: 100% 0% 0% 0% / 100% 0% 100% 0%;
+        box-shadow: -2px -2px 0 0 var(--nameBGColor);
+        bottom: var(--textBoxTranslationUp);
+        left: 100%;
+        transform: translate(-46%, 100%);
+      }
+    }
+
+    .name {
+      font-size: 12px;
+      margin: 5px 20px var(--textBoxTranslationUp) 0px;
+      align-self: center;
+    }
+  }
+
+  .text {
+    position: relative;
+
+    top: calc(var(--textBoxTranslationUp) * -1);
+    background-color: rgba(108, 39, 176, 0.9);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+
+    display: flex;
+    flex-direction: row;
+    border-radius: 0px 25px 25px 25px;
+    padding: var(--textBoxTranslationUp);
+    margin-left: calc(var(--circleDiameter) / 1.5);
+
+    font-size: 12px;
+    line-height: 16px;
+
+    .timeStamp {
+      position: absolute;
+      bottom: 100%;
+      right: 0px;
+      padding: 0px 20px 5px 0px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+  }
+}
+
+.messageRight {
+  justify-content: flex-end;
+
+  .inner {
+    .imgContainer {
+      order: 1;
+
+      &::after {
+        content: '';
+        background-color: transparent;
+
+        border-radius: 0% 100% 0% 0% / 0% 100% 100% 0%;
+        box-shadow: 2px -2px 0 0 var(--nameBGColor);
+        bottom: var(--textBoxTranslationUp);
+        left: 0%;
+      }
+    }
+
+    .name {
+      order: 0;
+      margin: 5px 0px var(--textBoxTranslationUp) 20px;
+    }
+  }
+
+  .text {
+    border-radius: 25px 0px 25px 25px;
+    margin-right: calc(var(--circleDiameter) / 1.5);
+    margin-left: unset;
+
+    .timeStamp {
+      right: unset;
+      left: 0px;
+      padding: 0px 0px 5px 20px;
+    }
+  }
+}
